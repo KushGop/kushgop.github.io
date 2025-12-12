@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Developer Portfolio</title>
+    <title>Kush Gopeechund — Game Developer</title>
     <style>
         * {
             margin: 0;
@@ -12,452 +12,617 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #1a1d23 0%, #252a34 100%);
-            color: #e8eaed;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.5;
             overflow-x: hidden;
         }
 
-        .background-accent {
+        /* Animated Grain */
+        body::before {
+            content: '';
             position: fixed;
-            top: -50%;
-            right: -10%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(100, 120, 200, 0.06) 0%, transparent 70%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
             pointer-events: none;
-            z-index: 0;
-            animation: float 20s ease-in-out infinite;
+            z-index: 100;
+            animation: grain 8s steps(10) infinite;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-50px, 50px) rotate(5deg); }
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -5%); }
+            20% { transform: translate(-10%, 5%); }
+            30% { transform: translate(5%, -10%); }
+            40% { transform: translate(-5%, 15%); }
+            50% { transform: translate(-10%, 5%); }
+            60% { transform: translate(15%, 0); }
+            70% { transform: translate(0, 10%); }
+            80% { transform: translate(-15%, 0); }
+            90% { transform: translate(10%, 5%); }
         }
 
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        header {
-            padding: 80px 0 60px;
-        }
-
-        .header-content {
+        /* Top Bar */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
+            padding: 24px 40px;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        h1 {
-            font-size: 3.5em;
+        .logo {
+            font-size: 14px;
             font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 12px;
-            letter-spacing: -0.02em;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
-        .subtitle {
-            font-size: 1.3em;
-            color: #a8b3cf;
-            font-weight: 400;
-            margin-bottom: 30px;
-        }
-
-        nav {
+        .top-bar-right {
             display: flex;
-            gap: 35px;
+            align-items: center;
+            gap: 40px;
         }
 
-        nav a {
-            color: #c5cde0;
-            text-decoration: none;
-            font-size: 1em;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 8px 0;
+        .location {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.5);
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #6b7fd7, #9ba8d9);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #ffffff;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        section {
-            margin: 100px 0;
-        }
-
-        h2 {
-            font-size: 2.5em;
-            color: #ffffff;
-            margin-bottom: 50px;
+        .contact-btn {
+            background: #ffffff;
+            color: #0a0a0a;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: -0.01em;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
-        .section-intro {
-            font-size: 1.1em;
-            color: #a8b3cf;
-            max-width: 700px;
+        .contact-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 0 40px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 12vw, 10rem);
+            font-weight: 300;
+            letter-spacing: -0.03em;
+            margin-bottom: 30px;
+            line-height: 0.95;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
             margin-bottom: 50px;
-            line-height: 1.8;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 10px); }
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: clamp(2rem, 6vw, 5rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin: 120px 0 80px;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        /* Projects Grid */
+        .projects-section {
+            padding: 0 40px 120px;
+            max-width: 1600px;
+            margin: 0 auto;
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 35px;
-        }
-
-        .project-card {
-            background: rgba(30, 35, 45, 0.6);
-            backdrop-filter: blur(10px);
+            grid-template-columns: 1fr;
+            gap: 1px;
+            background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-item {
+            background: #0a0a0a;
+            padding: 60px;
             cursor: pointer;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 260px;
-            background: linear-gradient(135deg, #2a2f3d 0%, #1f242f 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: all 0.5s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .project-image::before {
+        .project-item::before {
             content: '';
             position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            background: 
-                linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.02) 50%, transparent 100%),
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transition: left 0.8s ease;
         }
 
-        .project-image::after {
-            content: 'GAME SCREENSHOT';
-            font-size: 0.75em;
-            letter-spacing: 0.2em;
-            color: rgba(168, 179, 207, 0.3);
-            font-weight: 600;
+        .project-item:hover::before {
+            left: 100%;
         }
 
-        .project-content {
-            padding: 30px;
+        .project-item:hover {
+            background: #111;
         }
 
-        .project-card h3 {
-            color: #ffffff;
-            font-size: 1.6em;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .project-card p {
-            color: #b8c3db;
-            margin-bottom: 25px;
-            line-height: 1.8;
-            font-size: 0.95em;
-        }
-
-        .tags {
+        .project-header {
             display: flex;
-            gap: 10px;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .project-number {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+        }
+
+        .project-item h3 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+
+        .project-description {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
-        .tag {
-            background: rgba(107, 127, 215, 0.15);
-            color: #9ba8d9;
-            padding: 7px 16px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            border: 1px solid rgba(107, 127, 215, 0.2);
-            font-weight: 500;
+        .project-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: rgba(255, 255, 255, 0.7);
             transition: all 0.3s ease;
         }
 
-        .tag:hover {
-            background: rgba(107, 127, 215, 0.25);
-            border-color: rgba(107, 127, 215, 0.4);
+        .project-tag:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
+        .project-arrow {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .project-item:hover .project-arrow {
+            transform: translateX(10px);
+        }
+
+        /* About Section */
         .about-section {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 60px;
-            align-items: start;
-        }
-
-        .about-text {
-            font-size: 1.1em;
-            color: #b8c3db;
-            line-height: 1.9;
-        }
-
-        .about-text p {
-            margin-bottom: 25px;
-        }
-
-        .skills-section h3 {
-            font-size: 1.3em;
-            color: #ffffff;
-            margin-bottom: 25px;
-            font-weight: 600;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .skill-item {
-            background: rgba(30, 35, 45, 0.6);
-            backdrop-filter: blur(10px);
-            padding: 16px 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: #c5cde0;
-            font-size: 0.9em;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .skill-item:hover {
-            border-color: rgba(107, 127, 215, 0.4);
-            background: rgba(107, 127, 215, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .contact-section {
-            text-align: center;
-            max-width: 800px;
+            padding: 120px 40px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .contact-section p {
-            font-size: 1.15em;
-            color: #b8c3db;
-            margin-bottom: 40px;
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-top: 60px;
+        }
+
+        .about-text {
+            font-size: 18px;
             line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .about-text p {
+            margin-bottom: 24px;
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .skill-item {
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 18px;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-item:hover {
+            color: rgba(255, 255, 255, 1);
+            padding-left: 20px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 120px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-title {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 300;
+            margin-bottom: 60px;
+            line-height: 1.2;
         }
 
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
             flex-wrap: wrap;
+            margin-top: 40px;
         }
 
-        .contact-links a {
-            color: #c5cde0;
+        .contact-link {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
-            font-size: 1em;
-            padding: 14px 30px;
+            padding: 16px 32px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+            border-radius: 50px;
             transition: all 0.3s ease;
-            font-weight: 500;
-            background: rgba(30, 35, 45, 0.4);
         }
 
-        .contact-links a:hover {
-            background: rgba(107, 127, 215, 0.2);
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.05);
             color: #ffffff;
-            border-color: rgba(107, 127, 215, 0.5);
-            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
+        /* Footer */
         footer {
-            text-align: center;
-            padding: 50px 0;
-            color: #7d8ba8;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            margin-top: 100px;
-            font-size: 0.9em;
+            padding: 60px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
+        .footer-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Responsive */
         @media (max-width: 1024px) {
-            .about-section {
+            .about-grid {
                 grid-template-columns: 1fr;
-                gap: 50px;
+                gap: 60px;
             }
 
-            .header-content {
-                flex-direction: column;
-                align-items: flex-start;
+            .top-bar {
+                padding: 20px 30px;
             }
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
+            .top-bar {
+                padding: 20px;
             }
 
-            h1 {
-                font-size: 2.5em;
+            .top-bar-right {
+                gap: 20px;
             }
 
-            h2 {
-                font-size: 2em;
+            .location {
+                display: none;
             }
 
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .hero, .projects-section, .about-section, .contact-section {
+                padding-left: 20px;
+                padding-right: 20px;
             }
 
-            .skills-grid {
-                grid-template-columns: 1fr;
+            .project-item {
+                padding: 40px 20px;
             }
 
-            nav {
+            .project-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .footer-links {
                 flex-direction: column;
                 gap: 15px;
             }
+        }
 
-            nav a {
-                display: inline-block;
-            }
+        /* Custom Cursor */
+        .custom-cursor {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.15s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
         }
     </style>
 </head>
 <body>
-    <div class="background-accent"></div>
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
 
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <div>
-                    <h1>Kush Gopeechund</h1>
-                    <p class="subtitle">Game Developer & Designer</p>
-                </div>
-                <nav>
-                    <a href="#projects">Projects</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
-                </nav>
-            </div>
-        </header>
-
-        <section id="projects">
-            <h2>Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image"></div>
-                    <div class="project-content">
-                        <h3>HoloTag</h3>
-                        <p>HoloTag is a competitive parkour-tag game where players chase, evade, and outmaneuver each other in high-speed arenas, turning movement skill and split-second decisions into victory.</p>
-                        <div class="tags">
-                            <span class="tag">Unreal Engine</span>
-                            <span class="tag">Blueprint</span>
-                            <span class="tag">3D</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image"></div>
-                    <div class="project-content">
-                        <h3>Sharks Paradise</h3>
-                        <p>Sharks Paradise is a colorful mobile game where players roam the ocean as a hungry shark, while surviving the dangers of bigger fish.</p>
-                        <div class="tags">
-                            <span class="tag">Unity</span>
-                            <span class="tag">C#</span>
-                            <span class="tag">2D</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image"></div>
-                    <div class="project-content">
-                        <h3>The Clockwork Passage</h3>
-                        <p>The Clockwork Passage is a VR adventure puzzle game where players explore a mysterious mechanical world, solving logical and physics-driven puzzles to uncover an ancient world.</p>
-                        <div class="tags">
-                            <span class="tag">Unity</span>
-                            <span class="tag">VR</span>
-                            <span class="tag">3D</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about">
-            <h2>About Me</h2>
-            <div class="about-section">
-                <div class="about-text">
-                    <p>I'm a passionate game developer who loves bringing creative ideas to life through code and design. With several years of experience across various game engines and platforms, I specialize in creating engaging player experiences.</p>
-                    <p>My work is rooted from indie projects, always focusing on meaningful gameplay mechanics and polished execution. I believe great games come from the perfect balance of technical skill and creative vision.</p>
-                </div>
-                <div class="skills-section">
-                    <h3>Skills & Tools</h3>
-                    <div class="skills-grid">
-                        <div class="skill-item">Unity & C#</div>
-                        <div class="skill-item">Unreal Engine</div>
-                        <div class="skill-item">Game Design</div>
-                        <div class="skill-item">Level Design</div>
-                        <div class="skill-item">C++</div>
-                        <div class="skill-item">Blueprint</div>
-                        <div class="skill-item">3D Modeling</div>
-                        <div class="skill-item">Version Control</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <h2>Let's Connect</h2>
-            <div class="contact-section">
-                <p>I'm always interested in hearing about new projects and opportunities. Whether you want to collaborate or just chat about game development, feel free to reach out!</p>
-                <div class="contact-links">
-                    <a href="mailto:your@email.com">Email</a>
-                    <a href="#">LinkedIn</a>
-                    <a href="#">GitHub</a>
-                    <a href="#">Twitter</a>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <p>&copy; 2025 Kush Gopeechund. All rights reserved.</p>
-        </footer>
+    <div class="top-bar">
+        <div class="logo">Kush Gopeechund</div>
+        <div class="top-bar-right">
+            <div class="location">Ottawa, Canada</div>
+            <a href="#contact" class="contact-btn">Let's Chat</a>
+        </div>
     </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 style="text-align: left;">game developer.<br>game designer.</h1>
+            <div  class="hero-subtitle">Focused. Curious. Driven.</div>
+        </div>
+        <div class="scroll-indicator">Scroll ↓</div>
+    </section>
+
+    <section class="projects-section">
+        <h2 class="section-title">selected projects.</h2>
+        
+        <div class="projects-grid">
+            <div class="project-item">
+                <div class="project-header">
+                    <div class="project-number">01</div>
+                    <div class="project-arrow">→</div>
+                </div>
+                <h3>HoloTag</h3>
+                <p class="project-description">A competitive parkour-tag game where players chase, evade, and outmaneuver each other in high-speed arenas, turning movement skill and split-second decisions into victory.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Unreal Engine</span>
+                    <span class="project-tag">Blueprint</span>
+                    <span class="project-tag">3D</span>
+                    <span class="project-tag">Multiplayer</span>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-header">
+                    <div class="project-number">02</div>
+                    <div class="project-arrow">→</div>
+                </div>
+                <h3>Sharks Paradise</h3>
+                <p class="project-description">A colorful mobile game where players roam the ocean as a hungry shark, surviving the dangers of bigger fish while exploring vibrant underwater environments.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Unity</span>
+                    <span class="project-tag">C#</span>
+                    <span class="project-tag">2D</span>
+                    <span class="project-tag">Mobile</span>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-header">
+                    <div class="project-number">03</div>
+                    <div class="project-arrow">→</div>
+                </div>
+                <h3>The Clockwork Passage</h3>
+                <p class="project-description">A VR adventure puzzle game where players explore a mysterious mechanical world, solving logical and physics-driven puzzles to uncover secrets of an ancient civilization.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Unity</span>
+                    <span class="project-tag">VR</span>
+                    <span class="project-tag">3D</span>
+                    <span class="project-tag">Puzzle</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <h2 class="section-title">about me.</h2>
+        
+        <div class="about-grid">
+            <div class="about-text">
+                <p>I'm a passionate game developer who brings creative ideas to life through code and design. With years of experience across various game engines and platforms, I specialize in creating engaging player experiences that resonate.</p>
+                <p>My work spans from indie projects to complex systems, always focusing on meaningful gameplay mechanics and polished execution. I believe great games emerge from the perfect balance of technical excellence and creative vision.</p>
+            </div>
+            
+            <div class="skills-list">
+                <div class="skill-item">Unity & C#</div>
+                <div class="skill-item">Unreal Engine</div>
+                <div class="skill-item">Game Design</div>
+                <div class="skill-item">Level Design</div>
+                <div class="skill-item">C++</div>
+                <div class="skill-item">Blueprint</div>
+                <div class="skill-item">3D Modeling</div>
+                <div class="skill-item">Version Control</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <h2 class="contact-title">Let's build your next<br>game together.</h2>
+        <p style="color: rgba(255, 255, 255, 0.6); font-size: 18px; max-width: 600px; margin: 0 auto;">I'm always interested in hearing about new projects and opportunities. Whether you want to collaborate or just chat about game development, feel free to reach out.</p>
+        
+        <div class="contact-links">
+            <a href="mailto:your@email.com" class="contact-link">Email</a>
+            <a href="#" class="contact-link">LinkedIn</a>
+            <a href="#" class="contact-link">GitHub</a>
+        </div>
+    </section>
+
+    <footer>
+        <div>© 2025 Kush Gopeechund</div>
+        <div class="footer-links">
+            <a href="#projects">Projects</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+        let followerX = 0;
+        let followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            const speed = 0.15;
+            
+            cursorX += (mouseX - cursorX) * speed;
+            cursorY += (mouseY - cursorY) * speed;
+            
+            followerX += (mouseX - followerX) * (speed * 0.5);
+            followerY += (mouseY - followerY) * (speed * 0.5);
+            
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            cursor.style.transform = 'translate(-50%, -50%)';
+            
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
+            cursorFollower.style.transform = 'translate(-50%, -50%)';
+            
+            requestAnimationFrame(animateCursor);
+        }
+
+        animateCursor();
+
+        // Hover effects for interactive elements
+        const interactiveElements = document.querySelectorAll('a, .project-item, .skill-item');
+        
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width = '60px';
+                cursor.style.height = '60px';
+                cursor.style.borderColor = 'rgba(255, 255, 255, 0.6)';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width = '40px';
+                cursor.style.height = '40px';
+                cursor.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
