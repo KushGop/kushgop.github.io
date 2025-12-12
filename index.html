@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0f0d;
+            color: #e8f5e9;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 100;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .leaf-accent {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at center, rgba(34, 139, 34, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .leaf-accent-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle at center, rgba(46, 125, 50, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        header {
+            padding: 100px 0 80px;
+            border-bottom: 1px solid rgba(76, 175, 80, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        h1 {
+            font-size: 4em;
+            font-weight: 300;
+            color: #ffffff;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.25em;
+            color: #81c784;
+            font-weight: 400;
+            margin-bottom: 40px;
+            letter-spacing: 0.01em;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            color: #a5d6a7;
+            text-decoration: none;
+            font-size: 0.95em;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #4caf50;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #4caf50;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            margin: 120px 0;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin-bottom: 60px;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 40px;
+            background: linear-gradient(180deg, #4caf50, #2e7d32);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background: rgba(15, 25, 20, 0.6);
+            border: 1px solid rgba(76, 175, 80, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(76, 175, 80, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #1a2f23 0%, #0d1912 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(76, 175, 80, 0.03) 2px,
+                rgba(76, 175, 80, 0.03) 4px
+            );
+        }
+
+        .project-image::after {
+            content: 'PROJECT PREVIEW';
+            font-size: 0.75em;
+            letter-spacing: 0.15em;
+            color: rgba(129, 199, 132, 0.3);
+            font-weight: 600;
+        }
+
+        .project-content {
+            padding: 35px;
+        }
+
+        .project-card h3 {
+            color: #ffffff;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        .project-card p {
+            color: #a5d6a7;
+            margin-bottom: 25px;
+            line-height: 1.7;
+            font-size: 0.95em;
+        }
+
+        .tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: transparent;
+            color: #66bb6a;
+            padding: 6px 14px;
+            border-radius: 2px;
+            font-size: 0.8em;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .about-text {
+            font-size: 1.15em;
+            color: #c8e6c9;
+            line-height: 1.9;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+        }
+
+        .skills-section h3 {
+            font-size: 1.2em;
+            color: #81c784;
+            margin-bottom: 25px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: rgba(15, 25, 20, 0.4);
+            padding: 18px;
+            border: 1px solid rgba(76, 175, 80, 0.15);
+            border-radius: 2px;
+            color: #a5d6a7;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            border-color: rgba(76, 175, 80, 0.4);
+            background: rgba(76, 175, 80, 0.05);
+        }
+
+        .contact-section {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-section p {
+            font-size: 1.15em;
+            color: #a5d6a7;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            color: #66bb6a;
+            text-decoration: none;
+            font-size: 0.9em;
+            padding: 14px 32px;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .contact-links a:hover {
+            background: #4caf50;
+            color: #0a0f0d;
+            border-color: #4caf50;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: #66bb6a;
+            border-top: 1px solid rgba(76, 175, 80, 0.1);
+            margin-top: 120px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 1024px) {
+            .about-section {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+    <div class="leaf-accent"></div>
+    <div class="leaf-accent-bottom"></div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>Your Name</h1>
+                    <p class="subtitle">Game Developer & Systems Designer</p>
+                </div>
+                <nav>
+                    <a href="#projects">Projects</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+        </header>
+
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3>Forest Guardian</h3>
+                        <p>An atmospheric puzzle platformer where players navigate through an enchanted forest, solving environmental puzzles to restore balance to nature.</p>
+                        <div class="tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">2D</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3>Verdant Realms</h3>
+                        <p>Open-world RPG featuring dynamic ecosystems and creature interactions. Players cultivate their own growing sanctuary while exploring vast landscapes.</p>
+                        <div class="tags">
+                            <span class="tag">Unreal Engine</span>
+                            <span class="tag">Blueprint</span>
+                            <span class="tag">3D</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3>Leaf & Shadow</h3>
+                        <p>Stealth adventure game where light and vegetation mechanics create unique gameplay. Use growing plants to create paths and hide from dangers.</p>
+                        <div class="tags">
+                            <span class="tag">Godot</span>
+                            <span class="tag">GDScript</span>
+                            <span class="tag">Indie</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>About</h2>
+            <div class="about-section">
+                <div class="about-text">
+                    <p>I'm a game developer specializing in creating immersive experiences that blend organic aesthetics with engaging mechanics. With several years in the industry, I focus on systems design and technical implementation.</p>
+                    <p>My approach combines technical precision with creative vision, resulting in games that feel both polished and innovative. I'm passionate about crafting worlds that respond meaningfully to player interaction.</p>
+                </div>
+                <div class="skills-section">
+                    <h3>Technical Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">Unity & C#</div>
+                        <div class="skill-item">Unreal Engine</div>
+                        <div class="skill-item">Game Design</div>
+                        <div class="skill-item">Level Design</div>
+                        <div class="skill-item">Systems Architecture</div>
+                        <div class="skill-item">Shader Programming</div>
+                        <div class="skill-item">Version Control</div>
+                        <div class="skill-item">Agile Development</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="contact-section">
+                <p>I'm available for freelance projects and collaborations. If you'd like to discuss working together or have questions about my work, feel free to reach out.</p>
+                <div class="contact-links">
+                    <a href="mailto:your@email.com">Email</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">GitHub</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Your Name. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
