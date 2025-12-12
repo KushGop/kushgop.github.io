@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kush Gopeechund - Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1d23 0%, #252a34 100%);
+            color: #e8eaed;
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding: 40px 20px;
+        }
+
+        .background-accent {
+            position: fixed;
+            top: -50%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(100, 120, 200, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-50px, 50px) rotate(5deg); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(30, 35, 45, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 50px 60px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+            color: #b8c3db;
+        }
+
+        .contact-info a {
+            color: #9ba8d9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #ffffff;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-weight: 600;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(107, 127, 215, 0.3);
+        }
+
+        .education-item,
+        .experience-item {
+            margin-bottom: 25px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .item-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .item-subtitle {
+            font-size: 0.95em;
+            color: #a8b3cf;
+            font-style: italic;
+        }
+
+        .project-container {
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 3px solid rgba(107, 127, 215, 0.3);
+            margin-top: 15px;
+        }
+
+        .project-item {
+            margin-bottom: 20px;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .project-title {
+            font-weight: 600;
+            color: #c5cde0;
+        }
+
+        .project-tech {
+            font-size: 0.85em;
+            color: #9ba8d9;
+            font-style: italic;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: #b8c3db;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #9ba8d9;
+        }
+
+        .skills-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .skill-category {
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+        }
+
+        .skill-label {
+            font-weight: 600;
+            color: #ffffff;
+            min-width: 180px;
+        }
+
+        .skill-list {
+            color: #b8c3db;
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .item-header,
+            .project-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .skill-category {
+                flex-direction: column;
+            }
+
+            .skill-label {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-accent"></div>
+
+    <div class="container">
+        <header>
+            <h1>Kush Gopeechund</h1>
+            <div class="contact-info">
+                <span>📧 <a href="mailto:kush.09@outlook.com">kush.09@outlook.com</a></span>
+                <span>🌐 <a href="https://www.kushgop.me/" target="_blank">kushgop.me</a></span>
+                <span>💻 <a href="https://github.com/kushgop" target="_blank">github.com/kushgop</a></span>
+                <span>📱 (613) 720-5874</span>
+            </div>
+        </header>
+
+        <div class="section">
+            <h2>Education</h2>
+            <div class="education-item">
+                <div class="item-header">
+                    <div class="item-title">University of Toronto</div>
+                </div>
+                <div class="item-subtitle">Certified in XR Development with Unity</div>
+            </div>
+            <div class="education-item">
+                <div class="item-header">
+                    <div class="item-title">Carleton University</div>
+                </div>
+                <div class="item-subtitle">Bachelor of Computer Science Major</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Work Experience</h2>
+            
+            <div class="experience-item">
+                <div class="item-header">
+                    <div class="item-title">Game Developer | Leafless Games</div>
+                    <div class="item-subtitle">June 2022 - Present</div>
+                </div>
+                
+                <div class="project-container">
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-title">Parkour Game Prototype</div>
+                        </div>
+                        <div class="project-tech">Unreal Engine, C++, Blender, Autodesk Maya</div>
+                        <ul>
+                            <li>Developed a multiplayer game featuring a custom animation system with layered blending and state machines.</li>
+                            <li>Designed and modeled game-ready characters and environmental assets in Blender.</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-title">Sharks Paradise</div>
+                        </div>
+                        <div class="project-tech">Unity, C#, Jira, Clip Studio Pro, Visual Studio, GitHub</div>
+                        <ul>
+                            <li>Designed and shipped a 2D mobile game featuring missions, leaderboards, and collectible cosmetics.</li>
+                            <li>Engineered maintainable systems using object-oriented design and SOLID principles.</li>
+                            <li>Managed all aspects of development, UI design, and launch marketing solo.</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-title">Untitled Escape Room Game</div>
+                        </div>
+                        <div class="project-tech">Unity, C#, Clip Studio, Visual Studio, GitHub, Blender</div>
+                        <ul>
+                            <li>Developing a 3D puzzle-adventure game with professional asset and code pipeline.</li>
+                            <li>Created environmental art, level greyboxing, puzzle prototypes, and narrative storyboards.</li>
+                            <li>Designed and iterated on unique logic puzzles to promote creative problem-solving.</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-title">Packaged Up! Prototype</div>
+                        </div>
+                        <div class="project-tech">Unity, C#, Clip Studio Pro, Visual Studio, GitHub, Blender</div>
+                        <ul>
+                            <li>Led a two-person team and ran weekly agile sprints with sprint planning and retrospectives.</li>
+                            <li>Reviewed and maintained code architecture with emphasis on readability and scalability.</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-title">VR Escape Room</div>
+                        </div>
+                        <div class="project-tech">Unity, C#, Meta Quest</div>
+                        <ul>
+                            <li>Developed a VR interaction system for realistic object manipulation.</li>
+                            <li>Designed immersive VR UI for intuitive in-game actions and feedback.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="item-header">
+                    <div class="item-title">Associate Developer | Infosys Limited</div>
+                    <div class="item-subtitle">October 2022 - October 2023</div>
+                </div>
+                <div class="project-container">
+                    <ul>
+                        <li>Completed extensive technical training in Python, Linux, AWS, and Machine Learning.</li>
+                        <li>Gained foundational knowledge in cloud computing and AI-driven solutions.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="item-header">
+                    <div class="item-title">Full Stack Developer | Studio Red Landscape Architecture Inc.</div>
+                    <div class="item-subtitle">November 2021 - October 2022</div>
+                </div>
+                <div class="project-container">
+                    <ul>
+                        <li>Designed and programmed a responsive and dynamic WordPress theme for the company from scratch.</li>
+                        <li>Implemented scalability for the website by learning PHP and the CMS functions.</li>
+                        <li>Tested the site using developer tools provided by Visual Studio Code's community and the tools from WordPress.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-label">Programming Languages:</div>
+                    <div class="skill-list">C++, C#, Python, Java, JavaScript, PHP, SQL</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-label">Game Engines:</div>
+                    <div class="skill-list">Unreal Engine 5, Unity 5 (3D/2D, Mobile, VR)</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-label">Tools:</div>
+                    <div class="skill-list">GitHub, Jira, Visual Studio, Blender, Maya, Clip Studio Pro, Linux, AutoCAD</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-label">Languages:</div>
+                    <div class="skill-list">English (fluent), French (intermediate)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
