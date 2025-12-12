@@ -13,57 +13,39 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0a0f0d;
-            color: #e8f5e9;
+            background: linear-gradient(135deg, #1a1d23 0%, #252a34 100%);
+            color: #e8eaed;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        .grain {
+        .background-accent {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0.03;
-            z-index: 100;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        .leaf-accent {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle at center, rgba(34, 139, 34, 0.08) 0%, transparent 70%);
+            top: -50%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(100, 120, 200, 0.06) 0%, transparent 70%);
             pointer-events: none;
             z-index: 0;
+            animation: float 20s ease-in-out infinite;
         }
 
-        .leaf-accent-bottom {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle at center, rgba(46, 125, 50, 0.06) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-50px, 50px) rotate(5deg); }
         }
 
         .container {
             position: relative;
             z-index: 1;
-            max-width: 1400px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 0 40px;
         }
 
         header {
-            padding: 100px 0 80px;
-            border-bottom: 1px solid rgba(76, 175, 80, 0.1);
+            padding: 80px 0 60px;
         }
 
         .header-content {
@@ -71,57 +53,52 @@
             justify-content: space-between;
             align-items: center;
             gap: 40px;
-        }
-
-        .header-left {
-            flex: 1;
+            flex-wrap: wrap;
         }
 
         h1 {
-            font-size: 4em;
-            font-weight: 300;
+            font-size: 3.5em;
+            font-weight: 600;
             color: #ffffff;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             letter-spacing: -0.02em;
         }
 
         .subtitle {
-            font-size: 1.25em;
-            color: #81c784;
+            font-size: 1.3em;
+            color: #a8b3cf;
             font-weight: 400;
-            margin-bottom: 40px;
-            letter-spacing: 0.01em;
+            margin-bottom: 30px;
         }
 
         nav {
             display: flex;
-            gap: 40px;
+            gap: 35px;
         }
 
         nav a {
-            color: #a5d6a7;
+            color: #c5cde0;
             text-decoration: none;
-            font-size: 0.95em;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            font-size: 1em;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
+            padding: 8px 0;
         }
 
         nav a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
-            height: 1px;
-            background: #4caf50;
+            height: 2px;
+            background: linear-gradient(90deg, #6b7fd7, #9ba8d9);
             transition: width 0.3s ease;
         }
 
         nav a:hover {
-            color: #4caf50;
+            color: #ffffff;
         }
 
         nav a:hover::after {
@@ -129,55 +106,51 @@
         }
 
         section {
-            margin: 120px 0;
+            margin: 100px 0;
         }
 
         h2 {
             font-size: 2.5em;
             color: #ffffff;
-            margin-bottom: 60px;
-            font-weight: 300;
+            margin-bottom: 50px;
+            font-weight: 600;
             letter-spacing: -0.01em;
-            position: relative;
-            padding-left: 25px;
         }
 
-        h2::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 40px;
-            background: linear-gradient(180deg, #4caf50, #2e7d32);
+        .section-intro {
+            font-size: 1.1em;
+            color: #a8b3cf;
+            max-width: 700px;
+            margin-bottom: 50px;
+            line-height: 1.8;
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 35px;
         }
 
         .project-card {
-            background: rgba(15, 25, 20, 0.6);
-            border: 1px solid rgba(76, 175, 80, 0.15);
-            border-radius: 4px;
+            background: rgba(30, 35, 45, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+            cursor: pointer;
         }
 
         .project-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(76, 175, 80, 0.4);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         }
 
         .project-image {
             width: 100%;
-            height: 280px;
-            background: linear-gradient(135deg, #1a2f23 0%, #0d1912 100%);
+            height: 260px;
+            background: linear-gradient(135deg, #2a2f3d 0%, #1f242f 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -190,39 +163,34 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(76, 175, 80, 0.03) 2px,
-                rgba(76, 175, 80, 0.03) 4px
-            );
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.02) 50%, transparent 100%),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px);
         }
 
         .project-image::after {
-            content: 'PROJECT PREVIEW';
+            content: 'GAME SCREENSHOT';
             font-size: 0.75em;
-            letter-spacing: 0.15em;
-            color: rgba(129, 199, 132, 0.3);
+            letter-spacing: 0.2em;
+            color: rgba(168, 179, 207, 0.3);
             font-weight: 600;
         }
 
         .project-content {
-            padding: 35px;
+            padding: 30px;
         }
 
         .project-card h3 {
             color: #ffffff;
-            font-size: 1.5em;
+            font-size: 1.6em;
             margin-bottom: 15px;
-            font-weight: 400;
-            letter-spacing: -0.01em;
+            font-weight: 600;
         }
 
         .project-card p {
-            color: #a5d6a7;
+            color: #b8c3db;
             margin-bottom: 25px;
-            line-height: 1.7;
+            line-height: 1.8;
             font-size: 0.95em;
         }
 
@@ -233,27 +201,31 @@
         }
 
         .tag {
-            background: transparent;
-            color: #66bb6a;
-            padding: 6px 14px;
-            border-radius: 2px;
-            font-size: 0.8em;
-            border: 1px solid rgba(76, 175, 80, 0.3);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            background: rgba(107, 127, 215, 0.15);
+            color: #9ba8d9;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            border: 1px solid rgba(107, 127, 215, 0.2);
             font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: rgba(107, 127, 215, 0.25);
+            border-color: rgba(107, 127, 215, 0.4);
         }
 
         .about-section {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
             align-items: start;
         }
 
         .about-text {
-            font-size: 1.15em;
-            color: #c8e6c9;
+            font-size: 1.1em;
+            color: #b8c3db;
             line-height: 1.9;
         }
 
@@ -262,34 +234,35 @@
         }
 
         .skills-section h3 {
-            font-size: 1.2em;
-            color: #81c784;
+            font-size: 1.3em;
+            color: #ffffff;
             margin-bottom: 25px;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            font-weight: 600;
         }
 
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
         }
 
         .skill-item {
-            background: rgba(15, 25, 20, 0.4);
-            padding: 18px;
-            border: 1px solid rgba(76, 175, 80, 0.15);
-            border-radius: 2px;
-            color: #a5d6a7;
+            background: rgba(30, 35, 45, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 16px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #c5cde0;
             font-size: 0.9em;
             font-weight: 500;
             transition: all 0.3s ease;
+            text-align: center;
         }
 
         .skill-item:hover {
-            border-color: rgba(76, 175, 80, 0.4);
-            background: rgba(76, 175, 80, 0.05);
+            border-color: rgba(107, 127, 215, 0.4);
+            background: rgba(107, 127, 215, 0.1);
+            transform: translateY(-2px);
         }
 
         .contact-section {
@@ -300,7 +273,7 @@
 
         .contact-section p {
             font-size: 1.15em;
-            color: #a5d6a7;
+            color: #b8c3db;
             margin-bottom: 40px;
             line-height: 1.8;
         }
@@ -308,35 +281,35 @@
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 20px;
             flex-wrap: wrap;
         }
 
         .contact-links a {
-            color: #66bb6a;
+            color: #c5cde0;
             text-decoration: none;
-            font-size: 0.9em;
-            padding: 14px 32px;
-            border: 1px solid rgba(76, 175, 80, 0.3);
-            border-radius: 2px;
+            font-size: 1em;
+            padding: 14px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
             transition: all 0.3s ease;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
             font-weight: 500;
+            background: rgba(30, 35, 45, 0.4);
         }
 
         .contact-links a:hover {
-            background: #4caf50;
-            color: #0a0f0d;
-            border-color: #4caf50;
+            background: rgba(107, 127, 215, 0.2);
+            color: #ffffff;
+            border-color: rgba(107, 127, 215, 0.5);
+            transform: translateY(-2px);
         }
 
         footer {
             text-align: center;
-            padding: 60px 0;
-            color: #66bb6a;
-            border-top: 1px solid rgba(76, 175, 80, 0.1);
-            margin-top: 120px;
+            padding: 50px 0;
+            color: #7d8ba8;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 100px;
             font-size: 0.9em;
         }
 
@@ -374,23 +347,25 @@
             }
 
             nav {
-                flex-wrap: wrap;
-                gap: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                display: inline-block;
             }
         }
     </style>
 </head>
 <body>
-    <div class="grain"></div>
-    <div class="leaf-accent"></div>
-    <div class="leaf-accent-bottom"></div>
+    <div class="background-accent"></div>
 
     <div class="container">
         <header>
             <div class="header-content">
-                <div class="header-left">
-                    <h1>Your Name</h1>
-                    <p class="subtitle">Game Developer & Systems Designer</p>
+                <div>
+                    <h1>Kush Gopeechund</h1>
+                    <p class="subtitle">Game Developer & Designer</p>
                 </div>
                 <nav>
                     <a href="#projects">Projects</a>
@@ -406,21 +381,8 @@
                 <div class="project-card">
                     <div class="project-image"></div>
                     <div class="project-content">
-                        <h3>Forest Guardian</h3>
-                        <p>An atmospheric puzzle platformer where players navigate through an enchanted forest, solving environmental puzzles to restore balance to nature.</p>
-                        <div class="tags">
-                            <span class="tag">Unity</span>
-                            <span class="tag">C#</span>
-                            <span class="tag">2D</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image"></div>
-                    <div class="project-content">
-                        <h3>Verdant Realms</h3>
-                        <p>Open-world RPG featuring dynamic ecosystems and creature interactions. Players cultivate their own growing sanctuary while exploring vast landscapes.</p>
+                        <h3>HoloTag</h3>
+                        <p>HoloTag is a competitive parkour-tag game where players chase, evade, and outmaneuver each other in high-speed arenas, turning movement skill and split-second decisions into victory.</p>
                         <div class="tags">
                             <span class="tag">Unreal Engine</span>
                             <span class="tag">Blueprint</span>
@@ -432,12 +394,25 @@
                 <div class="project-card">
                     <div class="project-image"></div>
                     <div class="project-content">
-                        <h3>Leaf & Shadow</h3>
-                        <p>Stealth adventure game where light and vegetation mechanics create unique gameplay. Use growing plants to create paths and hide from dangers.</p>
+                        <h3>Sharks Paradise</h3>
+                        <p>Sharks Paradise is a colorful mobile game where players roam the ocean as a hungry shark, while surviving the dangers of bigger fish.</p>
                         <div class="tags">
-                            <span class="tag">Godot</span>
-                            <span class="tag">GDScript</span>
-                            <span class="tag">Indie</span>
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">2D</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3>The Clockwork Passage</h3>
+                        <p>The Clockwork Passage is a VR adventure puzzle game where players explore a mysterious mechanical world, solving logical and physics-driven puzzles to uncover an ancient world.</p>
+                        <div class="tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">VR</span>
+                            <span class="tag">3D</span>
                         </div>
                     </div>
                 </div>
@@ -445,32 +420,32 @@
         </section>
 
         <section id="about">
-            <h2>About</h2>
+            <h2>About Me</h2>
             <div class="about-section">
                 <div class="about-text">
-                    <p>I'm a game developer specializing in creating immersive experiences that blend organic aesthetics with engaging mechanics. With several years in the industry, I focus on systems design and technical implementation.</p>
-                    <p>My approach combines technical precision with creative vision, resulting in games that feel both polished and innovative. I'm passionate about crafting worlds that respond meaningfully to player interaction.</p>
+                    <p>I'm a passionate game developer who loves bringing creative ideas to life through code and design. With several years of experience across various game engines and platforms, I specialize in creating engaging player experiences.</p>
+                    <p>My work is rooted from indie projects, always focusing on meaningful gameplay mechanics and polished execution. I believe great games come from the perfect balance of technical skill and creative vision.</p>
                 </div>
                 <div class="skills-section">
-                    <h3>Technical Skills</h3>
+                    <h3>Skills & Tools</h3>
                     <div class="skills-grid">
                         <div class="skill-item">Unity & C#</div>
                         <div class="skill-item">Unreal Engine</div>
                         <div class="skill-item">Game Design</div>
                         <div class="skill-item">Level Design</div>
-                        <div class="skill-item">Systems Architecture</div>
-                        <div class="skill-item">Shader Programming</div>
+                        <div class="skill-item">C++</div>
+                        <div class="skill-item">Blueprint</div>
+                        <div class="skill-item">3D Modeling</div>
                         <div class="skill-item">Version Control</div>
-                        <div class="skill-item">Agile Development</div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="contact">
-            <h2>Contact</h2>
+            <h2>Let's Connect</h2>
             <div class="contact-section">
-                <p>I'm available for freelance projects and collaborations. If you'd like to discuss working together or have questions about my work, feel free to reach out.</p>
+                <p>I'm always interested in hearing about new projects and opportunities. Whether you want to collaborate or just chat about game development, feel free to reach out!</p>
                 <div class="contact-links">
                     <a href="mailto:your@email.com">Email</a>
                     <a href="#">LinkedIn</a>
@@ -481,7 +456,7 @@
         </section>
 
         <footer>
-            <p>&copy; 2024 Your Name. All rights reserved.</p>
+            <p>&copy; 2025 Kush Gopeechund. All rights reserved.</p>
         </footer>
     </div>
 </body>
