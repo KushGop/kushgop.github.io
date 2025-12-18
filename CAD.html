@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kush Gopeechund — 3D Renders</title>
+    <title>Kush Gopeechund — CAD</title>
     <style>
         * {
             margin: 0;
@@ -193,6 +193,14 @@
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
+        .gallery-image {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
         .placeholder-text {
             font-size: 14px;
@@ -286,6 +294,30 @@
             color: rgba(255, 255, 255, 0.8);
         }
 
+        /* Hide the radio inputs (you already did hidden, but this is fine too) */
+input[name="filter"] { position: absolute; left: -9999px; }
+
+/* Default: show all */
+#filter-all:checked ~ .gallery-section .gallery-item {
+  display: block;
+}
+
+/* Models only */
+#filter-models:checked ~ .gallery-section .gallery-item {
+  display: none;
+}
+#filter-models:checked ~ .gallery-section .gallery-item.models {
+  display: block;
+}
+
+/* Drafting only */
+#filter-drafting:checked ~ .gallery-section .gallery-item {
+  display: none;
+}
+#filter-drafting:checked ~ .gallery-section .gallery-item.drafting {
+  display: block;
+}
+
         /* Responsive */
         @media (max-width: 768px) {
             .top-bar {
@@ -338,77 +370,80 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1>3D renders.</h1>
-            <p class="hero-subtitle">A collection of characters, environments, and assets created in Blender and Maya for game development projects.</p>
+            <h1>CAD.</h1>
+            <p class="hero-subtitle">A collection of assets and drafts work using Autodesk Fusion, Blender, and AutoCAD.</p>
         </div>
     </section>
 
+    <input type="radio" name="filter" id="filter-all" checked hidden>
+    <input type="radio" name="filter" id="filter-models" hidden>
+    <input type="radio" name="filter" id="filter-drafting" hidden>
+
     <section class="gallery-section">
         <div class="filter-section">
-            <button class="filter-btn active">All</button>
-            <button class="filter-btn">Characters</button>
-            <button class="filter-btn">Environments</button>
-            <button class="filter-btn">Props</button>
+            <label for="filter-all" class="filter-btn">All</label>
+            <label for="filter-models" class="filter-btn">Models</label>
+            <label for="filter-drafting" class="filter-btn">Drafting</label>
         </div>
 
         <div class="gallery-grid">
-            <div class="gallery-item">
+            <div class="gallery-item models">
                 <div class="gallery-placeholder">
-                    <span class="placeholder-text">Character Model 01</span>
+                    <img class="gallery-image" src="VR2.png">
                 </div>
                 <div class="gallery-caption">
-                    <div class="caption-title">Parkour Character</div>
-                    <div class="caption-tech">Blender · Substance Painter</div>
+                    <div class="caption-title">VR Headset</div>
+                    <div class="caption-tech">Fusion · Model</div>
                 </div>
             </div>
 
-            <div class="gallery-item">
+            <div class="gallery-item models">
                 <div class="gallery-placeholder">
-                    <span class="placeholder-text">Environment 01</span>
+                    <img class="gallery-image" src="DogBench.png">
                 </div>
                 <div class="gallery-caption">
-                    <div class="caption-title">Urban Arena</div>
-                    <div class="caption-tech">Blender · Unreal Engine</div>
+                    <div class="caption-title">Park Bench</div>
+                    <div class="caption-tech">Fusion · Model</div>
                 </div>
             </div>
 
-            <div class="gallery-item">
+            <div class="gallery-item models">
                 <div class="gallery-placeholder">
-                    <span class="placeholder-text">Character Model 02</span>
+                    <img class="gallery-image" src="Boom.png">
                 </div>
                 <div class="gallery-caption">
-                    <div class="caption-title">Game Avatar</div>
-                    <div class="caption-tech">Maya · ZBrush</div>
+                    <div class="caption-title">UE Boom Speaker</div>
+                    <div class="caption-tech">Fusion · Model</div>
                 </div>
             </div>
 
-            <div class="gallery-item">
+            <div class="gallery-item models">
                 <div class="gallery-placeholder">
-                    <span class="placeholder-text">Props 01</span>
+                    <img class="gallery-image" src="R2D2.png">
                 </div>
                 <div class="gallery-caption">
-                    <div class="caption-title">Game Assets Collection</div>
-                    <div class="caption-tech">Blender · Unity</div>
+                    <div class="caption-title">R2D2</div>
+                    <div class="caption-tech">AutoCAD · Model</div>
                 </div>
             </div>
 
-            <div class="gallery-item">
+            <div class="gallery-item drafting">
                 <div class="gallery-placeholder">
-                    <span class="placeholder-text">Environment 02</span>
+                    <img class="gallery-image" src="2D_Ashburn.png">
                 </div>
                 <div class="gallery-caption">
-                    <div class="caption-title">Clockwork Passage Scene</div>
-                    <div class="caption-tech">Blender · Unity</div>
+                    <div class="caption-title">Ashburn</div>
+                    <div class="caption-tech">AutoCAD · Drafting</div>
                 </div>
             </div>
 
-            <div class="gallery-item">
+            <div class="gallery-item drafting">
                 <div class="gallery-placeholder">
-                    <span class="placeholder-text">Character Model 03</span>
+                    <img class="gallery-image" src="2D_Outfalls.png">
                 </div>
                 <div class="gallery-caption">
                     <div class="caption-title">Stylized Character</div>
-                    <div class="caption-tech">Blender · Clip Studio</div>
+                    <div class="caption-tech">AutoCAD · Drafting</div>
                 </div>
             </div>
         </div>
