@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Clockwork Passage — Kush Gopeechund</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Animated Grain */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 100;
+            animation: grain 8s steps(10) infinite;
+        }
+
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -5%); }
+            20% { transform: translate(-10%, 5%); }
+            30% { transform: translate(5%, -10%); }
+            40% { transform: translate(-5%, 15%); }
+            50% { transform: translate(-10%, 5%); }
+            60% { transform: translate(15%, 0); }
+            70% { transform: translate(0, 10%); }
+            80% { transform: translate(-15%, 0); }
+            90% { transform: translate(10%, 5%); }
+        }
+
+        /* Top Bar */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 40px;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .logo:visited,
+        .logo:hover,
+        .logo:active {
+            color: #ffffff;
+        }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .location {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .contact-btn {
+            background: #ffffff;
+            color: #0a0a0a;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 120px 40px 80px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .project-number {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 9vw, 7rem);
+            font-weight: 300;
+            letter-spacing: -0.03em;
+            margin-bottom: 30px;
+            line-height: 0.95;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.02em;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .hero-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 10px); }
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 100px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 40px;
+            line-height: 1.1;
+        }
+
+        .content-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 75ch;
+        }
+
+        .content-text p {
+            margin-bottom: 24px;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        /* Feature Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+        }
+
+        .feature-item {
+            background: #0a0a0a;
+            padding: 40px;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .feature-item:hover::before {
+            left: 100%;
+        }
+
+        .feature-item:hover {
+            background: #111;
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .feature-description {
+            font-size: 15px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .tech-item {
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tech-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 10px;
+        }
+
+        .tech-value {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+        }
+
+        /* Image Placeholder */
+        .image-showcase {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .placeholder-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 40px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            margin-bottom: 40px;
+            line-height: 1.3;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            font-size: 15px;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .cta-btn-primary {
+            background: #ffffff;
+            color: #0a0a0a;
+        }
+
+        .cta-btn-primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
+        }
+
+        .cta-btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .cta-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #ffffff;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 20px;
+            }
+
+            .top-bar-right {
+                gap: 20px;
+            }
+
+            .location {
+                display: none;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .content-section {
+                padding: 60px 20px;
+            }
+
+            .cta-section {
+                padding: 60px 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+                padding: 40px 20px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="index.html" class="logo">Kush Gopeechund</a>
+        <div class="top-bar-right">
+            <div class="location">Ottawa, Canada</div>
+            <a href="resume.html" class="contact-btn">Resume</a>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="project-number">Project 03</div>
+            <h1>The Clockwork Passage</h1>
+            <p class="hero-subtitle">A VR adventure puzzle game where players explore a mysterious mechanical world, solving logical and physics-driven puzzles to uncover secrets of an ancient civilization.</p>
+            <div class="hero-tags">
+                <span class="hero-tag">Unity</span>
+                <span class="hero-tag">VR</span>
+                <span class="hero-tag">3D</span>
+                <span class="hero-tag">Puzzle</span>
+            </div>
+        </div>
+        <div class="scroll-indicator">Scroll ↓</div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-label">Overview</div>
+        <h2 class="section-title">Immersive VR puzzle adventure</h2>
+        <div class="content-text">
+            <p>The Clockwork Passage transports players into a beautifully crafted steampunk world filled with intricate mechanical puzzles and ancient mysteries. Using VR technology, players physically interact with gears, levers, and ancient mechanisms to progress through the story.</p>
+            <p>The game combines logical puzzle-solving with physics-based interactions, creating an immersive experience that leverages the unique capabilities of virtual reality. Every puzzle is designed to promote creative problem-solving and spatial reasoning.</p>
+        </div>
+
+        <div class="image-showcase">
+            <span class="placeholder-text">VR Gameplay Screenshot</span>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-label">Features</div>
+        <h2 class="section-title">Core gameplay systems</h2>
+
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🧩</div>
+                <h3 class="feature-title">Logic Puzzles</h3>
+                <p class="feature-description">Intricate mechanical puzzles that require careful observation and creative thinking to solve.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">🖐️</div>
+                <h3 class="feature-title">VR Interactions</h3>
+                <p class="feature-description">Realistic object manipulation with physics-based interactions using VR controllers.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">🏛️</div>
+                <h3 class="feature-title">Environment Design</h3>
+                <p class="feature-description">Beautifully crafted steampunk environments with detailed architecture and atmospheric lighting.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">📖</div>
+                <h3 class="feature-title">Narrative Depth</h3>
+                <p class="feature-description">Uncover the story of an ancient civilization through environmental storytelling and artifacts.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">Custom Assets</h3>
+                <p class="feature-description">Original 3D models, textures, and props created specifically for the game world.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">⚙️</div>
+                <h3 class="feature-title">Mechanical Systems</h3>
+                <p class="feature-description">Interconnected clockwork mechanisms that respond dynamically to player actions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-label">Development</div>
+        <h2 class="section-title">Technical implementation</h2>
+
+        <div class="two-column">
+            <div class="content-text">
+                <p>Built in Unity with a professional asset and code pipeline, The Clockwork Passage showcases advanced VR development techniques. The interaction system provides realistic physics-based object manipulation while maintaining comfortable VR locomotion and controls.</p>
+                <p>Level design focused on greyboxing and iterative prototyping to ensure puzzles were both challenging and intuitive. Each puzzle went through multiple rounds of playtesting to refine difficulty and ensure clear visual communication.</p>
+            </div>
+
+            <div class="content-text">
+                <p>All environment art, props, and mechanical elements were created in Blender, then optimized for VR performance. The art direction emphasized a cohesive steampunk aesthetic with copper, brass, and intricate clockwork details throughout.</p>
+                <p>Narrative storyboards were developed in Clip Studio Pro to plan environmental storytelling beats and ensure the mystery unfolded naturally through exploration. GitHub version control enabled clean asset management and iterative development.</p>
+            </div>
+        </div>
+
+        <div class="tech-stack">
+            <div class="tech-item">
+                <div class="tech-label">Engine</div>
+                <div class="tech-value">Unity 3D</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Language</div>
+                <div class="tech-value">C#</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">3D Modeling</div>
+                <div class="tech-value">Blender</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Concept Art</div>
+                <div class="tech-value">Clip Studio Pro</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Version Control</div>
+                <div class="tech-value">GitHub</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Platform</div>
+                <div class="tech-value">VR Headsets</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-label">Design Process</div>
+        <h2 class="section-title">From concept to reality</h2>
+
+        <div class="content-text">
+            <p>The development process emphasized iterative design and playtesting. Initial greybox prototypes focused on puzzle flow and spatial layout before adding visual polish. This approach allowed rapid iteration on puzzle mechanics without getting bogged down in asset creation.</p>
+            <p>Environmental storytelling was woven throughout the experience, with each area revealing new pieces of the ancient civilization's history. Visual cues guide players toward puzzle solutions while maintaining the game's mysterious atmosphere.</p>
+            <p>VR-specific design considerations included comfortable movement options, clear interaction affordances, and puzzle designs that leverage three-dimensional space effectively. Every interaction was tested to ensure it felt natural and intuitive in VR.</p>
+        </div>
+
+        <div class="image-showcase">
+            <span class="placeholder-text">Environment Concept Art</span>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-label">Key Achievements</div>
+        <h2 class="section-title">Project milestones</h2>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">VR</div>
+                <div class="stat-label">Native Experience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3D</div>
+                <div class="stat-label">Custom Assets</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">Logic</div>
+                <div class="stat-label">Puzzle Design</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">Story</div>
+                <div class="stat-label">Rich Narrative</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 class="cta-title">Interested in working together<br/>on your next game?</h2>
+        <div class="cta-buttons">
+            <a href="index.html#contact" class="cta-btn cta-btn-primary">Get in Touch</a>
+            <a href="index.html#projects" class="cta-btn cta-btn-secondary">View More Projects</a>
+        </div>
+    </section>
+
+    <footer>
+        <div>© 2025 Kush Gopeechund</div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="resume.html">Resume</a>
+            <a href="#top">Back to Top</a>
+        </div>
+    </footer>
+</body>
+</html>
